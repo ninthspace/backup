@@ -9,8 +9,8 @@ describe Backup::Archive do
       a.add '/home/rspecuser/somefile'
       a.add '/home/rspecuser/logs/'
       a.add '/home/rspecuser/dotfiles/'
-      a.exclude '/home/rspecuser/excludefile'
-      a.exclude '/home/rspecuser/excludedir/'
+      a.exclude '/home/rspecuser/badfile'
+      a.exclude '/home/rspecuser/wrongdir/'
     end
   end
 
@@ -51,7 +51,7 @@ describe Backup::Archive do
 
     it 'should return a tar -c friendly string' do
       archive.send(:paths_to_exclude).should ==
-      "--exclude={'/home/rspecuser/excludefile','/home/rspecuser/excludedir/'}"
+      "--exclude='/home/rspecuser/badfile' --exclude='/home/rspecuser/wrongdir/'"
     end
   end
 
